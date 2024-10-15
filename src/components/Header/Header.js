@@ -26,13 +26,18 @@ function Header() {
     }, []);
 
     return (
-        <div className="flex justify-between items-center mt-4 mb-4 mr-10">
-            <img src={logo} alt="logo" width={200} height={100} />
-            <button onClick={toggleDarkMode} className="text-2xl p-2 focus:outline-none">
-                {darkMode ? <FaSun className="text-yellow-400" /> : <FaMoon className="text-gray-900" />}
-            </button>
-            {/* <h1 className='flex text-3xl font-serif'>Artihcus Global</h1> */}
-            <hr className="border-gray-300 my-2" />
+        <div className=' '>
+            <div className="flex justify-between mt-4 mb-4 mr-10 ">
+                <img src={logo} alt="logo" width={200} height={100} />
+            
+            
+                    <button onClick={toggleDarkMode} className="flex text-2xl p-2 focus:outline-none justify-end">
+                        {darkMode ? <FaSun className="text-yellow-400" /> : <FaMoon className="text-gray-900" />}
+                    </button>
+            
+                {/* <h1 className='flex text-3xl font-serif'>Artihcus Global</h1> */}
+                {/* <hr className="border-gray-300 my-2" /> */}
+            </div>
         </div>
     );
 }

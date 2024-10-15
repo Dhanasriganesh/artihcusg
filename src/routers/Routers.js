@@ -7,11 +7,13 @@ import Template from '../pages/Template';
 import Detail from '../pages/Detail';
 import Preview from '../pages/Preview';
 import WordEditor from '../pages/WordEditor';
+import Login from "../pages/Login";
 function Routers() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/final" element={<Final />} />
         <Route path='/template' element={<Template/>}/>
         <Route path="/detail" element={<Detail />} />

@@ -43,7 +43,7 @@ function Home() {
             </div>
 
             <div className="flex justify-center text-2xl m-4 mt-10 transition duration-300">
-                <Link to="./template" className="relative group">
+                <Link to="../template" className="relative group">
                     {/* Gradient Background */}
                     <div className="absolute inset-0 rounded-full bg-gradient-to-r from-pink-400 via-red-400 to-purple-500 p-2">
                         {/* Empty div for gradient background */}
