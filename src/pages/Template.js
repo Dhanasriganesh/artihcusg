@@ -8,7 +8,12 @@ import docu from "../Docs/docu.pdf";
 import doc2 from "../Docs/doc2.docx";
 import { HiTemplate } from "react-icons/hi";
 import { CgTemplate } from "react-icons/cg";
-
+import { FcDocument } from "react-icons/fc";
+import { LiaToolsSolid } from "react-icons/lia";
+import { IoTimerOutline } from "react-icons/io5";
+import { TiExport } from "react-icons/ti";
+import { Link } from 'react-router-dom';
+import { FaCaretDown, FaCaretRight } from "react-icons/fa";
 // Sample data for document templates
 const templates = [
     { id: 1, name: '1', document: docu },
@@ -80,7 +85,8 @@ const documentStructure = [
     }
 ];
 
-function Template() {
+function Template() 
+{
     const [selectedTemplate, setSelectedTemplate] = useState(null);
     const [previewDocument, setPreviewDocument] = useState(null);
     const [selectedContent, setSelectedContent] = useState(null);
@@ -91,24 +97,29 @@ function Template() {
     const [isResizing, setIsResizing] = useState(0);
     const [percentage, setPercentage] = useState(0); // Percentage for the progress bar
     const [savedMessage, setSavedMessage] = useState(''); // State for saved message
+    const [isLogoSaved, setIsLogoSaved] = useState(false); // State for logo saved
     const [customerName, setCustomerName] = useState('');
     const [projectName, setProjectName] = useState('');
     const [projectType, setProjectType] = useState('');
     const [warehouseNumber, setWarehouseNumber] = useState('');
     const navigate = useNavigate();
     const [isPreviewVisible, setIsPreviewVisible] = useState(true);
+    const [isTemplateSelected, setIsTemplateSelected] = useState(false);
+    const [isDarkMode, setIsDarkMode] = useState(false);
 
-    const handleClosePreview = () => {
+
+    const handleClosePreview = () => 
+        {
         console.log('Close button clicked'); // Debugging log
         setIsPreviewVisible(false);
     };
     const handleMouseDown = (e) => {
         setIsResizing(true);
     };
-        // Function to handle closing the selected content
-        const handleCloseContent = () => {
-            setSelectedContent('No content selected'); // Reset selected content
-        };
+    // Function to handle closing the selected content
+    const handleCloseContent = () => {
+        setSelectedContent('No content selected'); // Reset selected content
+    };
 
     const handleMouseMove = (e) => {
         if (isResizing) {
@@ -135,20 +146,20 @@ function Template() {
         }
     };
     // Handle template selection
-   // Handle template selection
-const handleTemplateSelect = (id) => {
-    setSelectedTemplate(id);
-    const selected = templates.find(template => template.id === id);
-    if (selected) {
-        setPreviewDocument(selected.document);
-        setIsPreviewVisible(true); // Show the preview section when a template is clicked
-
-        // Automatically navigate to WordEditor if Template 4 is selected
-        if (id === 4) {
-            navigate('/editor', { state: { templateId: id } });
+    // Handle template selection
+    const handleTemplateSelect = (id) => {
+        setSelectedTemplate(id);
+        const selected = templates.find(template => template.id === id);
+        if (selected) {
+            setPreviewDocument(selected.document);
+            setIsPreviewVisible(true); // Show the preview section when a template is clicked
+            setIsTemplateSelected(true);
+            // Automatically navigate to WordEditor if Template 4 is selected
+            if (id === 4) {
+                navigate('/editor', { state: { templateId: id } });
+            }
         }
-    }
-};
+    };
 
 
     // Toggle section for showing sub-headings or sub-sub-headings
@@ -219,11 +230,20 @@ const handleTemplateSelect = (id) => {
             setPercentage(0); // Reset percentage when a new logo is uploaded
         }
     };
+    const toggleDarkMode = () => {
+        setIsDarkMode((prev) => !prev);
+    };
 
-    return (
-        <div className="flex h-screen w-auto mb-3 onMouseMove={handleResize} onMouseUp={stopResizing}"
+const togglePreviewVisibility = () => {
+    setIsPreviewVisible(prev => !prev);
+};
+return (
+    <div>
+
+        <div className="{isDarkMode ? 'bg-gray-900 text-white' : 'bg-white text-black'} flex h-screen w-auto mb-3 onMouseMove={handleResize} onMouseUp={stopResizing}"
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}>
+
             {/* Left Sidebar with scrolling */}
             <div className=" bg-gray-100 p-4 space-y-5 border-r border-gray-300"
                 style={{ width: `${sidebarWidth}px`, maxHeight: '100vh' }}>
@@ -235,7 +255,7 @@ const handleTemplateSelect = (id) => {
                     >
                         <CgTemplate />
                     </button>
-                    <h2 className="text-xl font-bold ml-4">Templates</h2>
+                    <h2 className="text-xl font-serif ml-4">Templates</h2>
                 </div>
                 {/* Display templates only if showTemplates is true */}
                 {showTemplates && (
@@ -243,47 +263,48 @@ const handleTemplateSelect = (id) => {
                         {templates.map((template) => (
                             <div
                                 key={template.id}
-                                className={`relative cursor-pointer p-2 rounded-md transition-transform duration-200 hover:scale-105 ${selectedTemplate === template.id ? 'bg-blue-100' : 'bg-white'}`}
+                                className={`relative cursor-pointer p-2 rounded-md transition-transform duration-200 hover:scale-105 ${selectedTemplate === template.id ? 'bg-orange-300' : 'bg-white'}`}
                                 onClick={() => handleTemplateSelect(template.id)}
                             >
                                 <div className="flex justify-center">
                                     <CgTemplate className="" />
                                 </div>
-                                <p className="text-center mt-2 text-sm truncate">{template.name}</p>
+                                <p className="text-center mt-2 font-serif truncate">{template.name}</p>
                                 {selectedTemplate === template.id && (
-                                    <div className="absolute top-2 right-2 text-2xl text-green-500">✔️</div>
+                                    <div className="absolute top-2 right-4 text-2xl text-green-500">✔️</div>
                                 )}
                             </div>
                         ))}
                     </div>
                 )}
-
                 {/* Document Structure - Headings and Sub-headings */}
                 <div className="mt-8 space-y-2 overflow-y-scroll" style={{ maxHeight: '75vh' }}>
                     {documentStructure.map(section => (
                         <div key={section.id}>
                             <h3
-                                className="font-bold text-lg cursor-pointer flex items-center"
+                                className="font-serif text-orange-600 text-lg cursor-pointer flex items-center"
                                 onClick={() => toggleSection(section.id)}
                             >
-                                {openSections[section.id] ? '-' : '+'} {section.title}
+                                {/* Use icons conditionally based on whether the section is open */}
+                                {openSections[section.id] ? <FaCaretDown /> : <FaCaretRight />} {section.title}
                             </h3>
                             {openSections[section.id] && (
-                                <div className="pl-4 space-y-1">
+                                <div className="pl-8 space-y-1">
                                     {section.subHeadings && section.subHeadings.map(sub => (
                                         <div key={sub.id}>
                                             <h4
-                                                className="cursor-pointer text-blue-700"
+                                                className="font-serif cursor-pointer text flex"
                                                 onClick={() => toggleSection(sub.id)}
                                             >
-                                                {openSections[sub.id] ? '-' : '+'} {sub.title}
+                                                {/* Use icons conditionally for subheadings */}
+                                                {openSections[sub.id] ? <FaCaretDown /> : <FaCaretRight />}{sub.title}
                                             </h4>
                                             {openSections[sub.id] && (
-                                                <div className="pl-4">
+                                                <div className="pl-8">
                                                     {sub.subSubHeadings ? sub.subSubHeadings.map(subSub => (
                                                         <p
                                                             key={subSub.id}
-                                                            className="cursor-pointer text-gray-600"
+                                                            className="cursor-pointer font-serif text-gray-600"
                                                             onClick={() => handleContentSelect(subSub.content)}
                                                         >
                                                             {subSub.title}
@@ -316,33 +337,50 @@ const handleTemplateSelect = (id) => {
 
 
 
-
-
-
                 {/* <button
-                className="bg-blue-600 text-white py-2 px-4 mt-10 rounded hover:bg-blue-700 w-full"
-                onClick={() => navigate('/final')}
-            >
-                Next
-            </button> */}
+                    className="bg-blue-600 text-white py-2 px-4 mt-10 rounded hover:bg-blue-700 w-full"
+                    onClick={() => navigate('/final')}
+                >
+                    Next
+                </button> */}
+
+
+
+
             </div>
             {/* Resizer */}
             <div className="w-1 bg-gray-400 cursor-col-resize" onMouseDown={startResizing}></div>
-
             {/* Center Panel for Content Display */}
             <div className="flex-grow p-4 w-full flex justify-center ">
                 <div className="text-center">
                     <h2 className="text-xl font-bold mb-4">Selected Section</h2>
-                     <div className="flex justify-between items-center">
+
+                    <div className="flex justify-between items-center">
                         <h3 className="text-lg">{selectedContent ? selectedContent : ""}</h3>
                         {selectedContent && (
                             <button
                                 onClick={handleCloseContent}
                                 className="text-gray-500 hover:text-gray-700 focus:outline-none"
-                                >
-                                    &#x2715;
+                            >
+                                &#x2715;
                             </button>
                         )}
+                    </div>
+
+                    <div className="flex sm:grid-cols-2 gap-8 mt-6">
+                        <Link className="flex flex-col items-center justify-center p-6 w- h- rounded-lg shadow-lg hover:bg-blue-100 transition duration-300">
+                            <FcDocument className="text-4xl text-blue-500 " />
+                            <h2 className=" font">Document Control</h2>
+                        </Link>
+                        <Link className="flex flex-col  items-center justify-center p-6  h- rounded-lg shadow-lg hover:bg-yellow-100 transition duration-300">
+                            <LiaToolsSolid className="text-4xl mb-3 text-yellow-500" />
+                            <h2 className="font">Scope Items</h2>
+                        </Link>
+                        <Link className="flex flex-col items-center justify-center p-6  h- rounded-lg shadow-lg hover:bg-green-100 transition duration-300">
+                            <IoTimerOutline className="text-4xl mb-3 text-green-500" />
+                            <h2 className="font">Table Of Contents</h2>
+                        </Link>
+
                     </div>
                     {(selectedContent === 'Logo' || selectedContent === 'Vendor logo content...') ? (
                         <div className='flex flex-col justify-center items-center mt-16'>
@@ -375,16 +413,13 @@ const handleTemplateSelect = (id) => {
                                     />
                                 </div>
                             )}
-
                             <button
                                 className="mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-green-600"
                                 onClick={handleSave}
                             >
                                 Save
                             </button>
-
                             {savedMessage && <p className="mt-2 text-green-600">{savedMessage}</p>}
-
                             <div className="mt-4 w-full bg-gray-200 rounded-full h-4">
                                 <div
                                     className="bg-green-500 h-full rounded-full"
@@ -393,8 +428,6 @@ const handleTemplateSelect = (id) => {
                             </div>
                         </div>
                     ) :
-
-
                         selectedContent === 'Customer sign-off authority content...' ? ( // Matching with the actual content
                             <div>
                                 <h1 className='text-2xl mb-2'>Sign-off Authority</h1>
@@ -410,49 +443,55 @@ const handleTemplateSelect = (id) => {
                                 </div>
                             </div>
                         ) :
-
-
-
                             (
-                                <p>{selectedContent==="-" || 'No content selected...'}</p>
+                                <p>{selectedContent === "-" || 'No content selected...'}</p>
                             )}
                 </div>
             </div>
-
-
             {/* Right Sidebar with Document Preview */}
-            {isPreviewVisible ? (
-        <div className="w-1/3 bg-gray-50 p-6 space-y-4 border-l border-gray-300 shadow-lg" style={{ maxHeight: '100vh' }}>
-            <div className="flex justify-between items-center mb-4">
-                <h2 className="text-xl font-bold text-gray-700">Document Preview</h2>
-                {/* Close Button */}
-                <button
-                    onClick={handleClosePreview}
-                    className="text-gray-500 hover:text-gray-700 focus:outline-none"
-                >
-                    &#x2715;
-                </button>
-            </div>
+            <div className={`fixed right-0 top-0 h-full transition-transform duration-300 ${isPreviewVisible ? 'translate-x-0' : 'translate-x-full'}`}>
+                <div className="w-1/3 bg-gray-50 p-6 space-y-4 border-l border-gray-300 shadow-lg" style={{ height:'850px', width:'250px' }}>
+                    <div className="flex justify-between items-center mb-4">
+                        <h2 className="text-xl font-bold text-gray-700">Document Preview</h2>
+                        {/* Slide Arrow Button */}
+                        <button
+                            onClick={togglePreviewVisibility}
+                            className="text-gray-500 hover:text-gray-700 focus:outline-none"
+                        >
+                            <span className="text-2xl">&lt;</span> {/* Arrow icon */}
+                        </button>
 
-            <div className="bg-white rounded-lg overflow-hidden shadow-inner h-full flex items-center justify-center">
-                {previewDocument ? (
-                    <iframe
-                        src={previewDocument}
-                        title="Document Preview"
-                        className="w-full h-full rounded-lg border-none"
-                        style={{ minHeight: '250px' }}
-                    />
-                ) : (
-                    <div className="flex text-gray-500">
-                        <p>No template selected. Please select a template to preview the document.</p>
+
+                    </div >
+                    {/* Document Preview Content */}
+                    <div className="bg-white rounded-lg overflow-hidden shadow-inner flex items-center justify-center">
+                        {previewDocument ? (
+                            <iframe
+                                src={previewDocument}
+                                title="Document Preview"
+                                className="w-full h-full rounded-lg border-none"
+                                style={{ minHeight: '650px' }}
+                            />
+                        ) : (
+                            <div className="flex items-center justify-center text-gray-500">
+                                <p>No template selected. Please select a template to preview the document.</p>
+                            </div>
+                        )}
                     </div>
-                )}
+                </div>
+
             </div>
-        </div>
-    ) : null
-    }
+            {/* Toggle Button on the Right Side */}
+            <button
+                onClick={togglePreviewVisibility}
+                className={`fixed right-0 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white rounded-full p-2 transition-transform duration-300 ${isPreviewVisible ? 'translate-x-full' : 'translate-x-0'}`}
+            >
+                <span className="text-2xl">&gt;</span> {/* Arrow icon */}
+            </button>
         </div >
-    );
+    </div>
+);
 }
+
 
 export default Template;
