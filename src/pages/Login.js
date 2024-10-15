@@ -8,7 +8,7 @@ function Login() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-orange-400 to-slate-300 dark:from-gray-800 dark:to-gray-900">
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-orange-400 to-slate-400 dark:from-gray-800 dark:to-gray-900">
       <div className="w-full max-w-md p-8 space-y-8 bg-white dark:bg-gray-800 shadow-lg rounded-lg">
         <div className="text-center">
           <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white">

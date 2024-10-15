@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import logo from "../../images/logo.jpg";
 import { FaSun, FaMoon } from 'react-icons/fa'; // Icons for dark/light mode
-
+import logoor from "../../images/logoor.png";
 function Header() {
     const [darkMode, setDarkMode] = useState(false);
 
@@ -27,8 +27,9 @@ function Header() {
 
     return (
         <div className=' '>
-            <div className="flex justify-between mt-4 mb-4 mr-10 ">
-                <img src={logo} alt="logo" width={200} height={100} />
+            <div className="flex justify-between mt-3 mb-3 mr-10 dark:bg-gray-900'">
+               <Link to="/home"> 
+               <img src={logo} alt="logo" width={200} height={100} /></Link>
             
             
                     <button onClick={toggleDarkMode} className="flex text-2xl p-2 focus:outline-none justify-end">
@@ -38,6 +39,10 @@ function Header() {
                 {/* <h1 className='flex text-3xl font-serif'>Artihcus Global</h1> */}
                 {/* <hr className="border-gray-300 my-2" /> */}
             </div>
+            <div className="relative">
+    <div className="absolute inset-0 h-1 bg-gray-50 shadow-black shadow-lg"></div>
+</div>
+
         </div>
     );
 }

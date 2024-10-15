@@ -468,7 +468,7 @@ function Template() {
                                             src={previewDocument}
                                             title="Document Preview"
                                             className="w-full h-full rounded-lg border-none"
-                                            style={{ minHeight: '650px' }}
+                                            style={{ minHeight: '570px' }}
                                         />
                                     ) : (
                                         <div className="flex items-center justify-center text-gray-500">

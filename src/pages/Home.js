@@ -7,18 +7,18 @@ import { FcDocument } from "react-icons/fc";
 import { LiaToolsSolid } from "react-icons/lia";
 import { IoTimerOutline } from "react-icons/io5";
 import { TiExport } from "react-icons/ti";
-
+import logoor from "../images/logoor.png"
+import newlogo from "../images/newlogo.png"
 function Home() {
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-white dark:bg-gray-900">
-            <img src={logo} width={200} height={200} className='mb-10' />
+            <img src={newlogo} width={200} height={200} className='mb-10' />
             <div className="relative flex text-3xl font-serif text-gray-900 dark:text-white">
                 <h1 className="overflow-hidden whitespace-nowrap border-r-4 border-white pr-2 animate-typing">
                     Hi there! Let's get started!
                 </h1>
                 <span className="inline-block w-1 h-10 bg-black animate-blink"></span> {/* Blinking cursor */}
             </div>
-
             {/* 4 Boxes Section */}
             <div className="flex flex-wrap gap-8 mt-6 justify-center">
                 <Link className="flex flex-col items-center justify-center p-6 w-64 rounded-lg shadow-lg bg-white dark:bg-gray-800 hover:bg-blue-100 dark:hover:bg-blue-600 transition duration-300">
@@ -53,6 +53,12 @@ function Home() {
                         className="relative text-white text-5xl group-hover:scale-110 transition duration-300"
                     />
                 </Link>
+            </div>
+            <div className='mb-10'>
+               
+               <Link to="../projects"> 
+                <h1>Projects</h1></Link> 
+                    
             </div>
         </div>
     );

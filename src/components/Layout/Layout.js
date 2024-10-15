@@ -1,16 +1,19 @@
-import React, { Fragment, useState } from 'react'
-import Header from '../Header/Header'
-import Routers from '../../routers/Routers'
+import React, { Fragment } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom'; // Import BrowserRouter
+import Header from '../Header/Header';
+import Routers from '../../routers/Routers';
+
 function Layout() {
   return (
-    <Fragment>
-        <Header />
+    <Router> {/* Wrap your component in Router */}
+      <Fragment>
+        {/* <Header /> */}
         <div>
-            <Routers/>
+          <Routers />
         </div>
-    </Fragment>
-    
-  )
+      </Fragment>
+    </Router>
+  );
 }
 
-export default Layout
+export default Layout;
