@@ -12,7 +12,7 @@ import Projects from '../pages/Projects';
 import Login from "../pages/Login";
 import Adminlogin from '../pages/Adminlogin';
 import Admin from '../pages/Admin';
-
+import OtpVerification from '../pages/OtpVerification';
 function Routers() {
   return (
     <>
@@ -29,6 +29,7 @@ function Routers() {
         <Route path="/preview" element={<Preview />} />
         <Route path="/editor" element={<WordEditor />} />
         <Route path="/projects" element={<Projects />} />
+        <Route path="/otpverification" element={<OtpVerification />} />
       </Routes>
     </>
   );

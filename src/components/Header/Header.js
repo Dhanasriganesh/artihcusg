@@ -28,20 +28,20 @@ function Header() {
     return (
         <div className=' '>
             <div className="flex justify-between mt-3 mb-3 mr-10 dark:bg-gray-900'">
-               <Link to="/home"> 
-               <img src={logo} alt="logo" width={200} height={100} /></Link>
-            
-            
-                    <button onClick={toggleDarkMode} className="flex text-2xl p-2 focus:outline-none justify-end">
-                        {darkMode ? <FaSun className="text-yellow-400" /> : <FaMoon className="text-gray-900" />}
-                    </button>
-            
+                <Link to="/home">
+                    <img src={logo} alt="logo" width={200} height={100} /></Link>
+
+
+                <button onClick={toggleDarkMode} className="flex text-2xl p-2 focus:outline-none justify-end">
+                    {darkMode ? <FaSun className="text-yellow-400" /> : <FaMoon className="text-gray-900" />}
+                </button>
+
                 {/* <h1 className='flex text-3xl font-serif'>Artihcus Global</h1> */}
                 {/* <hr className="border-gray-300 my-2" /> */}
             </div>
-            <div className="relative">
-    <div className="absolute inset-0 h-1 bg-gray-50 shadow-black shadow-lg"></div>
-</div>
+
+            <hr className="absolute inset-0 h-1 bg-gray-50 shadow-black shadow-lg" />
+
 
         </div>
     );

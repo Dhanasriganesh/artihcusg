@@ -365,7 +365,7 @@ function Template() {
                             )}
                         </div>
 
-                        <div className="flex sm:grid-cols-2 gap-8 mt-6">
+                        {/* <div className="flex sm:grid-cols-2 gap-8 mt-6">
                             <Link className="flex flex-col items-center justify-center p-6  rounded-lg shadow-lg bg-white dark:bg-gray-800 hover:bg-blue-100 dark:hover:bg-blue-600 transition duration-300">
                                 <FcDocument className="text-4xl text-blue-500 " />
                                 <h2 className=" font dark:text-white">Document Control</h2>
@@ -379,7 +379,7 @@ function Template() {
                                 <h2 className="font dark:text-white">Table Of Contents</h2>
                             </Link>
 
-                        </div>
+                        </div> */}
                         {(selectedContent === 'Logo' || selectedContent === 'Vendor logo content...') ? (
                             <div className='flex flex-col justify-center items-center mt-16'>
                                 <div
